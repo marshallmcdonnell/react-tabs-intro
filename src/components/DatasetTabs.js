@@ -35,10 +35,11 @@ const initialDatasets = [
 export default class MenuTabularOnLeft extends Component {
     constructor(props) {
         super(props);
+        this.defaultDisplay = <h1>Hello, select a tab</h1>;
         this.state = {
             activeItem: tabName,
             datasets: initialDatasets,
-            display: <h1>Hello, select a tab</h1>
+            display: this.defaultDisplay
         };
     }
 
@@ -50,7 +51,19 @@ export default class MenuTabularOnLeft extends Component {
     }
 
     removeTab(tabName) {
-        console.log("Removing: " + tabName);
+        const tabs = this.state.datasets;
+        var display = this.state.display;
+        const newTabs= tabs.filter(obj => obj.name !== tabName);
+        if (newTabs === undefined || newTabs.length === 0) {
+            display = this.defaultDisplay;
+            console.log("here")
+            console.log(display)
+            console.log('bye')
+        }
+        this.setState({ 
+            display: display,
+            datasets: newTabs
+        })
     }
 
     renderTabFromDataset(dataset) {
@@ -75,7 +88,8 @@ export default class MenuTabularOnLeft extends Component {
 
 
     render() {
-        const display  = this.state.display;              
+        const display  = this.state.display;   
+        console.log(display)           
         
         var tabs = this.renderTabs();
         console.log(tabs);
