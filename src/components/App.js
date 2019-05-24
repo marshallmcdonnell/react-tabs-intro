@@ -1,13 +1,13 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import MenuTabularOnLeft from "./MenuTabularOnLeft";
+import DatasetTabs from "./DatasetTabs";
 
 
 class App extends React.Component {
     render() {
         return (
             <Container style={{ margin: 20 }}>
-                <MenuTabularOnLeft />
+                <DatasetTabs />
             </Container>
         )
     }
