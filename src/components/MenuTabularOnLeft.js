@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
-import { Grid, Menu, Segment, Icon } from 'semantic-ui-react';
+import { Grid, Menu, Segment } from 'semantic-ui-react';
+import DatasetTab from './DatasetTab';
 import 'semantic-ui-css/semantic.min.css';
 
 // Initial data
 const tabName = 'dataset2';
 
-const initialDatasets = {
-    "dataset1": {
-        title: "Dataset 1",
-        display: <Segment>I am Dataset 1</Segment>,
-        isActive: false
-    },
-    "dataset2": {   
-        title: "Dataset 2",
-        display: <Segment>I am Dataset 2</Segment>,
-        isActive: false
-    }
+const DatasetOne = {
+    name: "dataset1",
+    title: "Dataset 1",
+    display: <Segment>I am Dataset 1</Segment>,
+    isActive: false
+};
+const DatasetTwo = {   
+    name: "dataset2",
+    title: "Dataset 2",
+    display: <Segment>I am Dataset 2</Segment>,
+    isActive: false
+};
+const DatasetThree = {   
+    name: "dataset3",
+    title: "Dataset 3",
+    display: <Segment>I am Dataset 3</Segment>,
+    isActive: false
 }
 
-// Tab Component
-function MenuTab(props) {
-    return (
-        <Menu.Item key={props.name} active={props.isActive} onClick={props.changeTab} as='a'> 
-            {props.title}  <Icon name='remove circle' onClick={props.removeTab}/> 
-        </Menu.Item>
-    );
-}
+const initialDatasets = [
+    DatasetOne,
+    DatasetTwo,
+]
+
 
 // Tabs Component
 export default class MenuTabularOnLeft extends Component {
@@ -49,31 +53,28 @@ export default class MenuTabularOnLeft extends Component {
         console.log("Removing: " + tabName);
     }
 
-    renderTabFromDataset(i, dataset) {
+    renderTabFromDataset(dataset) {
         const activeItem = this.state.activeItem;
-        const isActive = (activeItem === dataset) ? true : false;
-        return <MenuTab
-                key={i}
-                name={dataset}
+        const isActive = (activeItem === dataset.name) ? true : false;
+        return <DatasetTab
+                key={dataset.name}
+                name={dataset.name}
                 title={dataset.title}
                 display={dataset.display}
                 isActive={isActive}
-                changeTab={() => this.changeTab(dataset, dataset.display)}
-                removeTab={() => this.removeTab(dataset.title)}
+                changeTab={() => this.changeTab(dataset.name, dataset.display)}
+                removeTab={() => this.removeTab(dataset.name)}
             />
     }
 
     renderTabs() {
         const datasets = this.state.datasets;
-        var tabs = [];
-        tabs.push(this.renderTabFromDataset(0, datasets['dataset1']));
-        tabs.push(this.renderTabFromDataset(1, datasets['dataset2']));
+        const tabs = datasets.map(dataset => this.renderTabFromDataset(dataset));
         return tabs;
     }
 
 
     render() {
-        const activeItem = this.state.activeItem;
         const display  = this.state.display;              
         
         var tabs = this.renderTabs();
