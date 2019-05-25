@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import DatasetTabs from "./DatasetTabs";
+import DatasetTabs from "./SemanticDatasetTabs";
 
 
 class App extends React.Component {
