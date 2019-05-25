@@ -32,7 +32,7 @@ const initialDatasets = [
 
 
 // Tabs Component
-export default class MenuTabularOnLeft extends Component {
+class MenuTabularOnLeft extends Component {
     constructor(props) {
         super(props);
         this.defaultDisplay = <h1>Hello, select a tab</h1>;
@@ -41,6 +41,12 @@ export default class MenuTabularOnLeft extends Component {
             datasets: initialDatasets,
             display: this.defaultDisplay
         };
+
+        this.changeTab = this.changeTab.bind(this);
+        this.removeTab = this.removeTab.bind(this);
+        this.renderTabFromDataset = this.renderTabFromDataset.bind(this);
+        this.renderTabs = this.renderTabs.bind(this);
+        this.addDataset = this.addDataset.bind(this);
     }
 
     changeTab(tabName, display) {
@@ -86,23 +92,26 @@ export default class MenuTabularOnLeft extends Component {
         return tabs;
     }
 
+    addDataset() {
+        const datasets = this.state.datasets;
+        datasets.push(DatasetThree);
+        this.setState({
+            datasets: datasets
+        })
+    }
 
     render() {
-        const display  = this.state.display;   
-        console.log(display)           
+        const display  = this.state.display;             
         
-        var tabs = this.renderTabs();
-        console.log(tabs);
-        
+        var tabs = this.renderTabs();        
 
         //const myArray = this.createTabs();
         return (
             <div>
-                <button>Add Dataset 3</button>
+                <button onClick={this.addDataset}> Add Dataset 3</button>
                 <Grid>
                     <Grid.Column width={4}>
                         <Menu fluid vertical tabular>
-
                             {tabs}
                         </Menu>
                     </Grid.Column>
@@ -115,3 +124,5 @@ export default class MenuTabularOnLeft extends Component {
         )
     }
 }
+
+export default MenuTabularOnLeft;
