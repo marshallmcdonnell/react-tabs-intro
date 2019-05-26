@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
-import { Grid, Menu, Segment } from 'semantic-ui-react';
+import { JsonForms } from '@jsonforms/react';
+import { Grid, Menu} from 'semantic-ui-react';
 import DatasetTab from './SemanticDatasetTab';
 import 'semantic-ui-css/semantic.min.css';
+
+import personSchema from '../schemas/personSchema';
+import addressSchema from '../schemas/addressSchema';
+
+import personUISchema from '../schemas/personUISchema';
+import addressUISchema from '../schemas/addressUISchema';
 
 // Initial data
 const tabName = 'dataset2';
@@ -9,19 +16,19 @@ const tabName = 'dataset2';
 const DatasetOne = {
     name: "dataset1",
     title: "Dataset 1",
-    display: <Segment>I am Dataset 1</Segment>,
+    display: <JsonForms schema={personSchema} uischema={personUISchema} path='person'/>,
     isActive: false
 };
 const DatasetTwo = {   
     name: "dataset2",
     title: "Dataset 2",
-    display: <Segment>I am Dataset 2</Segment>,
+    display: <JsonForms schema={addressSchema} uischema={addressUISchema} path='address'/>,
     isActive: false
 };
 const DatasetThree = {   
     name: "dataset3",
     title: "Dataset 3",
-    display: <Segment>I am Dataset 3</Segment>,
+    display: <JsonForms schema={personSchema} uischema={personUISchema} path='person'/>,
     isActive: false
 }
 
