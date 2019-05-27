@@ -3,7 +3,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 // Tab Component
-function DatasetTab(props) {
+function SciDataTab(props) {
     return (
         <Menu.Item key={props.name} active={props.isActive} onClick={props.changeTab} as='a'> 
             {props.title}  <Icon name='remove circle' onClick={props.removeTab}/> 
@@ -11,4 +11,4 @@ function DatasetTab(props) {
     );
 }
 
-export default DatasetTab;
+export default SciDataTab;

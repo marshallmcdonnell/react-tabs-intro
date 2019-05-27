@@ -1,13 +1,13 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import DatasetTabs from "./SemanticDatasetTabs";
+import MainTabs from "./MainTabs";
 
 
 class App extends React.Component {
     render() {
         return (
             <Container style={{ margin: 20 }}>
-                <DatasetTabs />
+                <MainTabs />
             </Container>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { JsonForms } from '@jsonforms/react';
 import { Grid, Menu} from 'semantic-ui-react';
-import DatasetTab from './SemanticDatasetTab';
+import SciDataTab from './SciDataTab';
 import 'semantic-ui-css/semantic.min.css';
 
 import personSchema from '../schemas/personSchema';
@@ -39,7 +39,7 @@ const initialDatasets = [
 
 
 // Tabs Component
-class MenuTabularOnLeft extends Component {
+class SciDataTabs extends Component {
     constructor(props) {
         super(props);
         this.defaultDisplay = <h1>Hello, select a tab</h1>;
@@ -82,7 +82,7 @@ class MenuTabularOnLeft extends Component {
     renderTabFromDataset(dataset) {
         const activeItem = this.state.activeItem;
         const isActive = (activeItem === dataset.name) ? true : false;
-        return <DatasetTab
+        return <SciDataTab
                 key={dataset.name}
                 name={dataset.name}
                 title={dataset.title}
@@ -132,4 +132,4 @@ class MenuTabularOnLeft extends Component {
     }
 }
 
-export default MenuTabularOnLeft;
+export default SciDataTabs;
