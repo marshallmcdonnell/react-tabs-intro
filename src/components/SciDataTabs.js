@@ -11,8 +11,6 @@ import personUISchema from '../schemas/personUISchema';
 import addressUISchema from '../schemas/addressUISchema';
 
 // Initial data
-const tabName = 'dataset2';
-
 const DatasetOne = {
     name: "dataset1",
     title: "Dataset 1",
@@ -37,16 +35,19 @@ const initialDatasets = [
     DatasetTwo,
 ]
 
+const initialActiveTab = {
+    name: DatasetOne.name,
+    display: DatasetOne.display
+}
 
 // Tabs Component
 class SciDataTabs extends Component {
     constructor(props) {
         super(props);
-        this.defaultDisplay = <h1>Hello, select a tab</h1>;
         this.state = {
-            activeItem: tabName,
+            activeItem: initialActiveTab.name,
+            display: initialActiveTab.display,
             datasets: initialDatasets,
-            display: this.defaultDisplay
         };
 
         this.changeTab = this.changeTab.bind(this);
