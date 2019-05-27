@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { JsonForms } from '@jsonforms/react';
-import { Grid, Menu} from 'semantic-ui-react';
+import { Grid, Menu, Segment} from 'semantic-ui-react';
 import SciDataTab from './SciDataTab';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -10,23 +10,96 @@ import addressSchema from '../schemas/addressSchema';
 import personUISchema from '../schemas/personUISchema';
 import addressUISchema from '../schemas/addressUISchema';
 
+class SciDataTabPanel extends Component {
+    constructor(props) {
+        super(props);
+
+        this.inputPanel = <JsonForms schema={props.schema} uischema={props.uischema} path={props.path}/>
+        this.jsonldPanel = <h1>Insert Data</h1>
+
+        this.state = {
+            activeItem: 'Input',
+            display: this.inputPanel
+        }
+
+        this.changeTab = this.changeTab.bind(this);
+    }
+
+    renderInputPanel() {
+        return <JsonForms schema={this.props.schema} uischema={this.props.uischema} path={this.props.path}/>
+    }
+
+    renderJsonLD() {
+        return <h1>Insert Data</h1>
+    }
+    
+    
+    changeTab(tabName, display) {
+        this.setState({ 
+            activeItem: tabName,
+            display: display,
+        })
+    }
+    
+    render() {
+        const display = this.state.display;
+        const activeItem = this.state.activeItem;
+    
+        return (
+        <div>
+            <Menu pointing secondary>
+                <Menu.Item 
+                    name='Input'
+                    active={activeItem === 'Input'}
+                    onClick={() => this.changeTab('Input', this.renderInputPanel() )}
+                />
+                <Menu.Item
+                    name='JSON-LD'
+                    active={activeItem === 'JSON-LD'}
+                    onClick={() => this.changeTab('JSON-LD', this.renderJsonLD() )}
+                />
+            </Menu>
+    
+            <Segment>
+                {display}
+            </Segment>
+        </div>
+        )
+    }
+}
+
 // Initial data
 const DatasetOne = {
     name: "dataset1",
     title: "Dataset 1",
-    display: <JsonForms schema={personSchema} uischema={personUISchema} path='person'/>,
+    display:    
+        <SciDataTabPanel 
+            schema={personSchema}
+            uischema={personUISchema}
+            path='person'
+        />,
     isActive: false
 };
 const DatasetTwo = {   
     name: "dataset2",
     title: "Dataset 2",
-    display: <JsonForms schema={addressSchema} uischema={addressUISchema} path='address'/>,
+    display: 
+        <SciDataTabPanel 
+            schema={addressSchema}
+            uischema={addressUISchema}
+            path='address'
+        />,
     isActive: false
 };
 const DatasetThree = {   
     name: "dataset3",
     title: "Dataset 3",
-    display: <JsonForms schema={personSchema} uischema={personUISchema} path='person'/>,
+    display: 
+        <SciDataTabPanel 
+            schema={addressSchema}
+            uischema={addressUISchema}
+            path='address'
+        />,
     isActive: false
 }
 
@@ -58,6 +131,8 @@ class SciDataTabs extends Component {
     }
 
     changeTab(tabName, display) {
+        console.log('parent')
+        console.log(display)
         this.setState({ 
             activeItem: tabName,
             display: display,
@@ -70,9 +145,6 @@ class SciDataTabs extends Component {
         const newTabs= tabs.filter(obj => obj.name !== tabName);
         if (newTabs === undefined || newTabs.length === 0) {
             display = this.defaultDisplay;
-            console.log("here")
-            console.log(display)
-            console.log('bye')
         }
         this.setState({ 
             display: display,
