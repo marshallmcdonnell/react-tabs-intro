@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Icon, Segment } from 'semantic-ui-react';
-import { JsonForms } from '@jsonforms/react';
+
 import 'semantic-ui-css/semantic.min.css';
 
 
@@ -13,61 +13,29 @@ export function SciDataTab(props) {
     );
 }
 
-export class SciDataTabPanel extends React.Component {
-    constructor(props) {
-        super(props);
+export function SciDataTabPanel(props) {
+    const display = props.display;
+    const activeItem = props.activeItem;
 
-        this.inputPanel = <JsonForms schema={props.schema} uischema={props.uischema} path={props.path}/>
-        this.jsonldPanel = <h1>Insert Data</h1>
+    return (
+    <div>
+        <Menu pointing secondary>
+            <Menu.Item 
+                name='Input'
+                active={activeItem === 'Input'}
+                onClick={() => props.changeChildTab('Input')}
+            />
+            <Menu.Item
+                name='JSON-LD'
+                active={activeItem === 'JSON-LD'}
+                onClick={() => props.changeChildTab('JSON-LD')}
+            />
+        </Menu>
 
-        this.state = {
-            activeItem: 'Input',
-            display: this.inputPanel
-        }
-
-        this.changeTab = this.changeTab.bind(this);
-    }
-
-    renderInputPanel() {
-        return <JsonForms schema={this.props.schema} uischema={this.props.uischema} path={this.props.path}/>
-    }
-
-    renderJsonLD() {
-        return <h1>Insert Data</h1>
-    }
-    
-    
-    changeTab(tabName, display) {
-        this.setState({ 
-            activeItem: tabName,
-            display: display,
-        })
-    }
-    
-    render() {
-        const display = this.state.display;
-        const activeItem = this.state.activeItem;
-    
-        return (
-        <div>
-            <Menu pointing secondary>
-                <Menu.Item 
-                    name='Input'
-                    active={activeItem === 'Input'}
-                    onClick={() => this.changeTab('Input', this.renderInputPanel() )}
-                />
-                <Menu.Item
-                    name='JSON-LD'
-                    active={activeItem === 'JSON-LD'}
-                    onClick={() => this.changeTab('JSON-LD', this.renderJsonLD() )}
-                />
-            </Menu>
-    
-            <Segment>
-                {display}
-            </Segment>
-        </div>
-        )
-    }
+        <Segment>
+            {display}
+        </Segment>
+    </div>
+    )
 }
 
