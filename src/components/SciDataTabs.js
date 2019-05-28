@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { JsonForms } from '@jsonforms/react';
-import { Grid, Menu, Segment} from 'semantic-ui-react';
-import SciDataTab from './SciDataTab';
+
+import { Grid, Menu } from 'semantic-ui-react';
+import { SciDataTab, SciDataTabPanel } from './SciDataTab';
 import 'semantic-ui-css/semantic.min.css';
 
 import personSchema from '../schemas/personSchema';
@@ -10,97 +10,31 @@ import addressSchema from '../schemas/addressSchema';
 import personUISchema from '../schemas/personUISchema';
 import addressUISchema from '../schemas/addressUISchema';
 
-class SciDataTabPanel extends Component {
-    constructor(props) {
-        super(props);
 
-        this.inputPanel = <JsonForms schema={props.schema} uischema={props.uischema} path={props.path}/>
-        this.jsonldPanel = <h1>Insert Data</h1>
-
-        this.state = {
-            activeItem: 'Input',
-            display: this.inputPanel
-        }
-
-        this.changeTab = this.changeTab.bind(this);
-    }
-
-    renderInputPanel() {
-        return <JsonForms schema={this.props.schema} uischema={this.props.uischema} path={this.props.path}/>
-    }
-
-    renderJsonLD() {
-        return <h1>Insert Data</h1>
-    }
-    
-    
-    changeTab(tabName, display) {
-        this.setState({ 
-            activeItem: tabName,
-            display: display,
-        })
-    }
-    
-    render() {
-        const display = this.state.display;
-        const activeItem = this.state.activeItem;
-    
-        return (
-        <div>
-            <Menu pointing secondary>
-                <Menu.Item 
-                    name='Input'
-                    active={activeItem === 'Input'}
-                    onClick={() => this.changeTab('Input', this.renderInputPanel() )}
-                />
-                <Menu.Item
-                    name='JSON-LD'
-                    active={activeItem === 'JSON-LD'}
-                    onClick={() => this.changeTab('JSON-LD', this.renderJsonLD() )}
-                />
-            </Menu>
-    
-            <Segment>
-                {display}
-            </Segment>
-        </div>
-        )
-    }
-}
 
 // Initial data
 const DatasetOne = {
     name: "dataset1",
     title: "Dataset 1",
-    display:    
-        <SciDataTabPanel 
-            schema={personSchema}
-            uischema={personUISchema}
-            path='person'
-        />,
-    isActive: false
+    schema: personSchema,
+    uischema: personUISchema,
+    path: 'person'
 };
+
 const DatasetTwo = {   
     name: "dataset2",
     title: "Dataset 2",
-    display: 
-        <SciDataTabPanel 
-            schema={addressSchema}
-            uischema={addressUISchema}
-            path='address'
-        />,
-    isActive: false
-};
+    schema: addressSchema,
+    uischema: addressUISchema,
+    path: 'address'
+}
+
 const DatasetThree = {   
     name: "dataset3",
     title: "Dataset 3",
-    display: 
-        <SciDataTabPanel 
-            schema={addressSchema}
-            uischema={addressUISchema}
-            path='address'
-        />,
-    isActive: false
+    schema: personSchema,
+    uischema: personUISchema,
+    path: 'person'
 }
 
 const initialDatasets = [
@@ -108,20 +42,16 @@ const initialDatasets = [
     DatasetTwo,
 ]
 
-const initialActiveTab = {
-    name: DatasetOne.name,
-    display: DatasetOne.display
-}
-
 // Tabs Component
 class SciDataTabs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeItem: initialActiveTab.name,
-            display: initialActiveTab.display,
+            activeItem: DatasetOne.name,
             datasets: initialDatasets,
         };
+
+        this.defaultDisplay = <h1> </h1>
 
         this.changeTab = this.changeTab.bind(this);
         this.removeTab = this.removeTab.bind(this);
@@ -130,25 +60,32 @@ class SciDataTabs extends Component {
         this.addDataset = this.addDataset.bind(this);
     }
 
-    changeTab(tabName, display) {
-        console.log('parent')
-        console.log(display)
-        this.setState({ 
-            activeItem: tabName,
-            display: display,
-        })
-    }
+    changeTab(tabName ) { this.setState({ activeItem: tabName }) }
 
     removeTab(tabName) {
+        const activeItem = this.state.activeItem;
+        const isActive = (activeItem === tabName) ? true : false;
         const tabs = this.state.datasets;
-        var display = this.state.display;
         const newTabs= tabs.filter(obj => obj.name !== tabName);
-        if (newTabs === undefined || newTabs.length === 0) {
-            display = this.defaultDisplay;
+
+        // If no more tabs, return
+        if (newTabs.length === 0) {
+            this.setState({
+                datasets: []
+            })
+            return;
         }
-        this.setState({ 
-            display: display,
-            datasets: newTabs
+
+        // Check if we deleted the active tab
+        var activeTabName;
+        if (isActive) {
+            activeTabName = newTabs[0].name;
+        } else {
+            activeTabName = tabName;
+        }
+        this.setState({
+            datasets: newTabs,
+            activeItem: activeTabName
         })
     }
 
@@ -159,11 +96,22 @@ class SciDataTabs extends Component {
                 key={dataset.name}
                 name={dataset.name}
                 title={dataset.title}
-                display={dataset.display}
                 isActive={isActive}
-                changeTab={() => this.changeTab(dataset.name, dataset.display)}
+                changeTab={() => this.changeTab(dataset.name)}
                 removeTab={() => this.removeTab(dataset.name)}
             />
+    }
+
+    renderActiveTabPanel() {
+        const activeItem = this.state.activeItem;
+        const datasets = this.state.datasets;
+        const activeDatasetArray = datasets.filter(obj => (activeItem === obj.name));
+        const dataset = activeDatasetArray[0];
+        if (dataset !== undefined) {
+            return <SciDataTabPanel schema={dataset.schema} uischema={dataset.uischema} path={dataset.path} />
+        } else {
+            return this.defaultDisplay
+        }
     }
 
     renderTabs() {
@@ -181,8 +129,7 @@ class SciDataTabs extends Component {
     }
 
     render() {
-        const display  = this.state.display;             
-        
+        const display = this.renderActiveTabPanel();            
         var tabs = this.renderTabs();        
 
         //const myArray = this.createTabs();
