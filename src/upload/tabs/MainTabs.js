@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Segment } from 'semantic-ui-react';
-import SciDataTabs from "./SciDataTabs";
-import * as Data from './InitialDatasets';
+import SciDataTabs from "../scidata-tabs/SciDataTabs";
+import * as Data from '../../constants/InitialDatasets';
 
 // Tabs
 const defaultDisplay = <button>Add Dataset 3</button>;

@@ -7,7 +7,7 @@ import {getData} from '@jsonforms/core';
 import { SciDataTab, SciDataTabPanel } from './SciDataTab';
 import 'semantic-ui-css/semantic.min.css';
 
-import * as Data from './InitialDatasets'
+import * as Data from '../../constants/InitialDatasets'
 
 // Tabs Component
 class SciDataTabs extends Component {
