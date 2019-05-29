@@ -52,6 +52,13 @@ class SciDataTabs extends Component {
         this.props.handleUpdateDatasets(newDatasets);
     }
 
+    removeAllTabs() {
+        this.props.handleUpdateDatasets([]);
+        this.setState({
+            display: this.defaultDisplay
+        })
+    }
+
     renderTabFromDataset(dataset) {
         const activeItem = this.state.activeItem;
         const isActive = (activeItem === dataset.name) ? true : false;
@@ -68,7 +75,7 @@ class SciDataTabs extends Component {
     renderJsonForm(dataset) {
         return <div>
             <JsonForms schema={dataset.schema} uischema={dataset.uischema} path={dataset.path}/>
-            <Button content='Submit' color='Violet' onClick={() => this.removeTab(dataset.name)}/>
+            <Button content='Submit' color='violet' onClick={() => this.removeTab(dataset.name)}/>
         </div>
     }
 
@@ -113,6 +120,7 @@ class SciDataTabs extends Component {
         //const myArray = this.createTabs();
         return (
             <div>
+                <Button content='Submit All Datasets' color='violet' onClick={() => this.removeAllTabs()}/>
                 <Grid>
                     <Grid.Column width={4}>
                         <Menu fluid vertical tabular>
