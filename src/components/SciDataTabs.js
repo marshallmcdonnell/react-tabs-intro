@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Menu } from 'semantic-ui-react';
 import { JsonForms } from '@jsonforms/react';
-import {getData, JsonFormsState} from '@jsonforms/core';
+import {getData} from '@jsonforms/core';
 
 import { SciDataTab, SciDataTabPanel } from './SciDataTab';
 import 'semantic-ui-css/semantic.min.css';
@@ -186,7 +186,7 @@ class SciDataTabs extends Component {
     }
 }
 
-const mapStateToProps = (state: JsonFormsState) => {
+const mapStateToProps = (state) => {
     return { data: getData(state) }
   };
   
