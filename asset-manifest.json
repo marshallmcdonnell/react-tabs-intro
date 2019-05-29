@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/react-tabs-intro/static/js/main.d9d8192d.chunk.js",
-    "main.js.map": "/react-tabs-intro/static/js/main.d9d8192d.chunk.js.map",
+    "main.js": "/react-tabs-intro/static/js/main.12f533f2.chunk.js",
+    "main.js.map": "/react-tabs-intro/static/js/main.12f533f2.chunk.js.map",
     "runtime~main.js": "/react-tabs-intro/static/js/runtime~main.2e6be598.js",
     "runtime~main.js.map": "/react-tabs-intro/static/js/runtime~main.2e6be598.js.map",
     "static/css/2.9e41d572.chunk.css": "/react-tabs-intro/static/css/2.9e41d572.chunk.css",
     "static/js/2.ae833301.chunk.js": "/react-tabs-intro/static/js/2.ae833301.chunk.js",
     "static/js/2.ae833301.chunk.js.map": "/react-tabs-intro/static/js/2.ae833301.chunk.js.map",
     "index.html": "/react-tabs-intro/index.html",
-    "precache-manifest.d738a2d3579ec3f9f843a68f89396eaa.js": "/react-tabs-intro/precache-manifest.d738a2d3579ec3f9f843a68f89396eaa.js",
+    "precache-manifest.0aebf5a00fd7780eef520c804b1286fe.js": "/react-tabs-intro/precache-manifest.0aebf5a00fd7780eef520c804b1286fe.js",
     "service-worker.js": "/react-tabs-intro/service-worker.js",
     "static/css/2.9e41d572.chunk.css.map": "/react-tabs-intro/static/css/2.9e41d572.chunk.css.map",
     "static/media/semantic.min.css": "/react-tabs-intro/static/media/outline-icons.ef60a4f6.woff"
