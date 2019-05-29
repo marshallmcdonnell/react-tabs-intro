@@ -1,18 +1,17 @@
 import React from 'react';
 import { Menu, Segment } from 'semantic-ui-react';
+import Upload from "../uploadTab/Upload";
 import SciDataTabs from "../scidata-tabs/SciDataTabs";
 import * as Data from '../../constants/InitialDatasets';
 
 // Tabs
-const defaultDisplay = <button>Add Dataset 3</button>;
-
 class MainTabs extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       activeItem: 'File Upload',
-      display: defaultDisplay,
+      display: this.renderFileUpload(),
       datasets: Data.initialDatasets
     }
 
@@ -29,8 +28,16 @@ class MainTabs extends React.Component {
     />
   }
 
-  renderFileUpload() {
+  renderFileUploadOld() {
     return <button onClick={this.addDataset}> Add Dataset 3</button>
+  }
+
+  renderFileUpload() {
+    return <div className="App">
+            <div className="Card">
+              <Upload />
+            </div>
+          </div>
   }
 
   changeTab(name) {
