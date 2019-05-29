@@ -21,6 +21,8 @@ class Upload extends Component {
   }
 
   onFilesAdded(files) {
+    console.log('Upload:onFilesAdded')
+    console.log(files)
     this.setState(prevState => ({
       files: prevState.files.concat(files)
     }));
@@ -43,6 +45,7 @@ class Upload extends Component {
   }
 
   sendRequest(file) {
+    console.log(file)
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
 
@@ -122,6 +125,10 @@ class Upload extends Component {
     }
   }
 
+  handleTitleChange (e) {
+    console.log(e.target.placeholder,e.target.value);
+  }
+
   render() {
     return (
       <div className="Upload">
@@ -143,8 +150,8 @@ class Upload extends Component {
                         <Label horizontal>Filename:</Label> {file.name}
                       </Grid.Column>
                       <Grid.Column>
-                        <Input size='mini' label='Title:' placeholder={file.name}/>
-                       </Grid.Column>
+                        <Input size='mini' label='Title:' placeholder={file.name} onChange={this.handleTitleChange.bind(this)} />
+                      </Grid.Column>
                     </Grid>
                   </Segment>
                       
