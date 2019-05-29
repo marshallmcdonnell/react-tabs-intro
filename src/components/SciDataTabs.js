@@ -32,13 +32,18 @@ class SciDataTabs extends Component {
         this.removeTab = this.removeTab.bind(this);
         this.renderTabFromDataset = this.renderTabFromDataset.bind(this);
         this.renderTabs = this.renderTabs.bind(this);
-        this.addDataset = this.addDataset.bind(this);
     }
 
-    changeTab(tabName ) { this.setState({ activeItem: tabName }) }
+    changeTab(tabName ) {
+        this.setState({
+            activeItem: tabName
+        })
+    }
 
     changeChildTab(tabName) {
-        this.setState({ childActiveItem: tabName })
+        this.setState({
+            childActiveItem: tabName
+        })
     }
 
     removeTab(tabName) {
@@ -98,14 +103,6 @@ class SciDataTabs extends Component {
         return tabs;
     }
 
-    addDataset() {
-        const datasets = this.props.datasets;
-        datasets.push(Data.DatasetThree);
-        this.setState({
-            datasets: datasets
-        })
-    }
-
     render() {
         const display = this.renderActiveTabPanel();            
         var tabs = this.renderTabs();     
@@ -113,7 +110,6 @@ class SciDataTabs extends Component {
         //const myArray = this.createTabs();
         return (
             <div>
-                <button onClick={this.addDataset}> Add Dataset 3</button>
                 <Grid>
                     <Grid.Column width={4}>
                         <Menu fluid vertical tabular>

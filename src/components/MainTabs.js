@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Segment } from 'semantic-ui-react';
 import SciDataTabs from "./SciDataTabs";
-import { initialDatasets } from './InitialDatasets'
+import * as Data from './InitialDatasets';
 
 // Tabs
 const defaultDisplay = <button>Add Dataset 3</button>;
@@ -13,23 +13,32 @@ class MainTabs extends React.Component {
     this.state = {
       activeItem: 'File Upload',
       display: defaultDisplay,
-      datasets: initialDatasets
+      datasets: Data.initialDatasets
     }
 
     this.changeTab = this.changeTab.bind(this);
     this.updateDatasets = this.updateDatasets.bind(this);
+    this.addDataset = this.addDataset.bind(this);
     this.setState = this.setState.bind(this);
+  }
+
+  renderSciDataTab(datasets) {
+    return <SciDataTabs
+      datasets={datasets}
+      handleUpdateDatasets={this.updateDatasets}
+    />
+  }
+
+  renderFileUpload() {
+    return <button onClick={this.addDataset}> Add Dataset 3</button>
   }
 
   changeTab(name) {
     var display;
     if (name === 'File Upload') {
-      display = <button>Add Dataset 3</button>
+      display = this.renderFileUpload();
     } else if( name === 'SciData') {
-      display = <SciDataTabs
-        datasets={this.state.datasets}
-        handleUpdateDatasets={this.updateDatasets}
-      />
+      display = this.renderSciDataTab(this.state.datasets);
     }
     this.setState({
       activeItem: name,
@@ -38,11 +47,19 @@ class MainTabs extends React.Component {
   }
 
   updateDatasets(datasets) { 
-    const display = <SciDataTabs
-      datasets={datasets}
-      handleUpdateDatasets={this.updateDatasets}
-    />
-    this.setState({ datasets: datasets, display: display });
+    const display = this.renderSciDataTab(datasets);
+    this.setState({ 
+      datasets: datasets,
+      display: display
+    });
+  }
+
+  addDataset() {
+    const datasets = this.state.datasets;
+    datasets.push(Data.DatasetThree);
+    this.setState({
+        datasets: datasets
+    })
   }
 
   render() {
