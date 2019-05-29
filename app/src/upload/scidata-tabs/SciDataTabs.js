@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Menu } from 'semantic-ui-react';
+import { Grid, Menu, Button } from 'semantic-ui-react';
 import { JsonForms } from '@jsonforms/react';
 import {getData} from '@jsonforms/core';
 
@@ -65,8 +65,11 @@ class SciDataTabs extends Component {
             />
     }
 
-    renderJsonForm(schema, uischema, path) {
-        return <JsonForms schema={schema} uischema={uischema} path={path}/>
+    renderJsonForm(dataset) {
+        return <div>
+            <JsonForms schema={dataset.schema} uischema={dataset.uischema} path={dataset.path}/>
+            <Button content='Submit' color='Violet' onClick={() => this.removeTab(dataset.name)}/>
+        </div>
     }
 
     renderActiveTabPanel() {
@@ -85,7 +88,7 @@ class SciDataTabs extends Component {
 
         var display;
         if(childActiveItem === 'Input') {
-            display=this.renderJsonForm(dataset.schema, dataset.uischema, dataset.path)
+            display=this.renderJsonForm(dataset)
         } else {
             display=JSON.stringify(dataForDataset, null, 2) 
         }
