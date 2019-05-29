@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Dropzone from "../dropzone/Dropzone";
 import "./Upload.css";
 import Progress from "../progress/Progress";
+import { Input, Grid, Segment, Label } from 'semantic-ui-react'
 
 class Upload extends Component {
   constructor(props) {
@@ -20,7 +21,6 @@ class Upload extends Component {
   }
 
   onFilesAdded(files) {
-    console.log(files)
     this.setState(prevState => ({
       files: prevState.files.concat(files)
     }));
@@ -36,7 +36,6 @@ class Upload extends Component {
       await Promise.all(promises);
 
       this.setState({ successfullUploaded: true, uploading: false });
-      console.log(promises)
     } catch (e) {
       // Not Production ready! Do some error handling here instead...
       this.setState({ successfullUploaded: true, uploading: false });
@@ -138,7 +137,17 @@ class Upload extends Component {
             {this.state.files.map(file => {
               return (
                 <div key={file.name} className="Row">
-                  <span className="Filename">{file.name}</span>
+                  <Segment>
+                    <Grid columns={2} relaxed='very'>
+                      <Grid.Column>
+                        <Label horizontal>Filename:</Label> {file.name}
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Input size='mini' label='Title:' placeholder={file.name}/>
+                       </Grid.Column>
+                    </Grid>
+                  </Segment>
+                      
                   {this.renderProgress(file)}
                 </div>
               );

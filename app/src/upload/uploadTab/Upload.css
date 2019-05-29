@@ -37,9 +37,12 @@
   color: #555;
 }
 
-.Filename {
-  margin-bottom: 8px;
-  font-size: 16px;
+.Filename {  
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin-bottom: 0px;
+  font-size: 24px;
   color: #555;
 }
 
@@ -48,7 +51,7 @@
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  height: 50px;
+  height: 120px;
   padding: 8px;
   overflow: hidden;
   box-sizing: border-box;
