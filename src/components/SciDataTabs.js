@@ -7,55 +7,20 @@ import {getData} from '@jsonforms/core';
 import { SciDataTab, SciDataTabPanel } from './SciDataTab';
 import 'semantic-ui-css/semantic.min.css';
 
-import personSchema from '../schemas/personSchema';
-import addressSchema from '../schemas/addressSchema';
-
-import personUISchema from '../schemas/personUISchema';
-import addressUISchema from '../schemas/addressUISchema';
-
-// Initial data
-const DatasetOne = {
-    name: "dataset1",
-    title: "Dataset 1",
-    schema: personSchema,
-    uischema: personUISchema,
-    path: 'person'
-};
-
-const DatasetTwo = {   
-    name: "dataset2",
-    title: "Dataset 2",
-    schema: addressSchema,
-    uischema: addressUISchema,
-    path: 'address'
-}
-
-const DatasetThree = {   
-    name: "dataset3",
-    title: "Dataset 3",
-    schema: personSchema,
-    uischema: personUISchema,
-    path: 'person'
-}
-
-const initialDatasets = [
-    DatasetOne,
-    DatasetTwo,
-]
+import * as Data from './InitialDatasets'
 
 // Tabs Component
 class SciDataTabs extends Component {
     constructor(props) {
         super(props);
 
-        const name = DatasetOne.name;
-        const schema = DatasetOne.schema;
-        const uischema = DatasetOne.uischema;
-        const path = DatasetOne.path;
+        const name = Data.DatasetOne.name;
+        const schema = Data.DatasetOne.schema;
+        const uischema = Data.DatasetOne.uischema;
+        const path = Data.DatasetOne.path;
 
         this.state = {
             activeItem: name,
-            datasets: initialDatasets,
             childActiveItem: 'Input',
             childDisplay: this.renderJsonForm(schema, uischema, path)
         };
@@ -77,30 +42,9 @@ class SciDataTabs extends Component {
     }
 
     removeTab(tabName) {
-        const activeItem = this.state.activeItem;
-        const isActive = (activeItem === tabName) ? true : false;
-        const tabs = this.state.datasets;
-        const newTabs= tabs.filter(obj => obj.name !== tabName);
-
-        // If no more tabs, return
-        if (newTabs.length === 0) {
-            this.setState({
-                datasets: []
-            })
-            return;
-        }
-
-        // Check if we deleted the active tab
-        var activeTabName;
-        if (isActive) {
-            activeTabName = newTabs[0].name;
-        } else {
-            activeTabName = tabName;
-        }
-        this.setState({
-            datasets: newTabs,
-            activeItem: activeTabName
-        })
+        const datasets = this.props.datasets;
+        const newDatasets = datasets.filter(obj => obj.name !== tabName);
+        this.props.handleUpdateDatasets(newDatasets);
     }
 
     renderTabFromDataset(dataset) {
@@ -122,7 +66,7 @@ class SciDataTabs extends Component {
 
     renderActiveTabPanel() {
         const activeItem = this.state.activeItem;
-        const datasets = this.state.datasets;
+        const datasets = this.props.datasets;
         const activeDatasetArray = datasets.filter(obj => (activeItem === obj.name));
         const dataset = activeDatasetArray[0];
 
@@ -149,14 +93,14 @@ class SciDataTabs extends Component {
     }
 
     renderTabs() {
-        const datasets = this.state.datasets;
+        const datasets = this.props.datasets;
         const tabs = datasets.map(dataset => this.renderTabFromDataset(dataset));
         return tabs;
     }
 
     addDataset() {
-        const datasets = this.state.datasets;
-        datasets.push(DatasetThree);
+        const datasets = this.props.datasets;
+        datasets.push(Data.DatasetThree);
         this.setState({
             datasets: datasets
         })

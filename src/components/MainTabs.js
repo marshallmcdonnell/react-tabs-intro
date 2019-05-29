@@ -1,30 +1,49 @@
-import React, { Component } from 'react';
-import { Input, Menu, Segment } from 'semantic-ui-react';
+import React from 'react';
+import { Menu, Segment } from 'semantic-ui-react';
 import SciDataTabs from "./SciDataTabs";
+import { initialDatasets } from './InitialDatasets'
 
-const tabs = {
-    "File Upload": <button>Add Dataset 3</button>,
-    "SciData" : <SciDataTabs />,
-}
+// Tabs
+const defaultDisplay = <button>Add Dataset 3</button>;
 
+class MainTabs extends React.Component {
+  constructor(props) {
+    super(props);
 
-class MainTabs extends Component {
-    constructor(props) {
-        super(props);
-        this.tabs = tabs;
-        this.defaultDisplay = this.tabs['File Upload'];
-        this.state = {
-            activeItem: 'File Upload',
-            display: this.defaultDisplay
-        }
-
-        this.changeTab = this.changeTab.bind(this);
+    this.state = {
+      activeItem: 'File Upload',
+      display: defaultDisplay,
+      datasets: initialDatasets
     }
 
-    changeTab = (e, { name }) => this.setState({
-        activeItem: name,
-        display: this.tabs[name],
+    this.changeTab = this.changeTab.bind(this);
+    this.updateDatasets = this.updateDatasets.bind(this);
+    this.setState = this.setState.bind(this);
+  }
+
+  changeTab(name) {
+    var display;
+    if (name === 'File Upload') {
+      display = <button>Add Dataset 3</button>
+    } else if( name === 'SciData') {
+      display = <SciDataTabs
+        datasets={this.state.datasets}
+        handleUpdateDatasets={this.updateDatasets}
+      />
+    }
+    this.setState({
+      activeItem: name,
+      display: display,
     })
+  }
+
+  updateDatasets(datasets) { 
+    const display = <SciDataTabs
+      datasets={datasets}
+      handleUpdateDatasets={this.updateDatasets}
+    />
+    this.setState({ datasets: datasets, display: display });
+  }
 
   render() {
     const activeItem = this.state.activeItem;
@@ -36,18 +55,13 @@ class MainTabs extends Component {
             <Menu.Item
                 name='File Upload'
                 active={activeItem === 'File Upload'}
-                onClick={this.changeTab}
+                onClick={() => this.changeTab('File Upload')}
             />
             <Menu.Item
                 name='SciData'
                 active={activeItem === 'SciData'}
-                onClick={this.changeTab}
+                onClick={() => this.changeTab('SciData')}
             />
-          <Menu.Menu position='right'>
-            <Menu.Item>
-              <Input icon='search' placeholder='Search...' />
-            </Menu.Item>
-          </Menu.Menu>
         </Menu>
 
         <Segment>
