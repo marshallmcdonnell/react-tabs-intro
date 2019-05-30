@@ -4,6 +4,9 @@ import "./Upload.css";
 import Progress from "../progress/Progress";
 import { Input, Grid, Segment, Label } from 'semantic-ui-react'
 
+import personSchema from '../../schemas/personSchema';
+import personUISchema from '../../schemas/personUISchema';
+
 class Upload extends Component {
   constructor(props) {
     super(props);
@@ -21,8 +24,6 @@ class Upload extends Component {
   }
 
   onFilesAdded(files) {
-    console.log('Upload:onFilesAdded')
-    console.log(files)
     this.setState(prevState => ({
       files: prevState.files.concat(files)
     }));
@@ -42,10 +43,24 @@ class Upload extends Component {
       // Not Production ready! Do some error handling here instead...
       this.setState({ successfullUploaded: true, uploading: false });
     }
+    this.fakeRetrieveFiles();
+  }
+
+  fakeRetrieveFiles() {
+    const files = this.state.files;
+    // files -> datasets
+    const datasets = files.map(file => this.fakeRetrieveFile(file));
+    console.log(datasets)
+  }
+
+  fakeRetrieveFile(file) {
+    file['schema'] = personSchema;
+    file['uischema'] = personUISchema;
+    file['path'] = 'person' //TODO: gotta change this to be unique
+    return file
   }
 
   sendRequest(file) {
-    console.log(file)
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
 
@@ -75,7 +90,7 @@ class Upload extends Component {
       });
 
       const formData = new FormData();
-      formData.append("file", file, file.name);
+      formData.append("file", file);
 
       req.open("POST", "http://localhost:8000/upload");
       req.send(formData);
@@ -126,7 +141,27 @@ class Upload extends Component {
   }
 
   handleTitleChange (e) {
-    console.log(e.target.placeholder,e.target.value);
+    const files = this.state.files;
+    var newFiles = [];
+    const filename = e.target.defaultValue;
+    const value = e.target.value;
+
+    // Update files values for change
+    for (var i = 0; i < files.length; i++) {
+      if (files[i].title === filename) {
+        newFiles[i] = { 
+          fileObj: files[i].fileObj,
+          title: value
+        }
+      } else {
+        newFiles[i] = files[i]
+      }
+    }
+
+    // Set new state of files
+    this.setState({
+      files: newFiles
+    })
   }
 
   render() {
@@ -143,14 +178,20 @@ class Upload extends Component {
           <div className="Files">
             {this.state.files.map(file => {
               return (
-                <div key={file.name} className="Row">
+                <div key={file.fileObj.name} className="Row">
                   <Segment>
                     <Grid columns={2} relaxed='very'>
                       <Grid.Column>
-                        <Label horizontal>Filename:</Label> {file.name}
+                        <Label horizontal>Filename:</Label> {file.fileObj.name}
                       </Grid.Column>
                       <Grid.Column>
-                        <Input size='mini' label='Title:' placeholder={file.name} onChange={this.handleTitleChange.bind(this)} />
+                        <Input
+                          key={file.fileObj.name}
+                          size='mini'
+                          label='Title:'
+                          defaultValue={file.title}
+                          onChange={this.handleTitleChange.bind(this)}
+                        />
                       </Grid.Column>
                     </Grid>
                   </Segment>

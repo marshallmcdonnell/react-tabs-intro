@@ -52,7 +52,11 @@ class Dropzone extends Component {
   fileListToArray(list) {
     const array = [];
     for (var i = 0; i < list.length; i++) {
-      array.push(list.item(i));
+      array.push({
+        fileObj: list.item(i),
+        title: list.item(i).name,
+        fileType: 'XY file'
+      });
     }
     return array;
   }
