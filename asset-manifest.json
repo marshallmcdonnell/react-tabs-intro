@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/react-tabs-intro/static/css/main.8784100a.chunk.css",
-    "main.js": "/react-tabs-intro/static/js/main.92d06778.chunk.js",
-    "main.js.map": "/react-tabs-intro/static/js/main.92d06778.chunk.js.map",
+    "main.css": "/react-tabs-intro/static/css/main.96dfebe8.chunk.css",
+    "main.js": "/react-tabs-intro/static/js/main.93d07d15.chunk.js",
+    "main.js.map": "/react-tabs-intro/static/js/main.93d07d15.chunk.js.map",
     "runtime~main.js": "/react-tabs-intro/static/js/runtime~main.2e6be598.js",
     "runtime~main.js.map": "/react-tabs-intro/static/js/runtime~main.2e6be598.js.map",
     "static/css/2.9e41d572.chunk.css": "/react-tabs-intro/static/css/2.9e41d572.chunk.css",
-    "static/js/2.b1a7e87b.chunk.js": "/react-tabs-intro/static/js/2.b1a7e87b.chunk.js",
-    "static/js/2.b1a7e87b.chunk.js.map": "/react-tabs-intro/static/js/2.b1a7e87b.chunk.js.map",
+    "static/js/2.753fea89.chunk.js": "/react-tabs-intro/static/js/2.753fea89.chunk.js",
+    "static/js/2.753fea89.chunk.js.map": "/react-tabs-intro/static/js/2.753fea89.chunk.js.map",
     "index.html": "/react-tabs-intro/index.html",
-    "precache-manifest.9edd480b602b5ba1bf2b6d3cab67cb8a.js": "/react-tabs-intro/precache-manifest.9edd480b602b5ba1bf2b6d3cab67cb8a.js",
+    "precache-manifest.3e3e3154ecbfc3dd1732d1089161df5a.js": "/react-tabs-intro/precache-manifest.3e3e3154ecbfc3dd1732d1089161df5a.js",
     "service-worker.js": "/react-tabs-intro/service-worker.js",
     "static/css/2.9e41d572.chunk.css.map": "/react-tabs-intro/static/css/2.9e41d572.chunk.css.map",
-    "static/css/main.8784100a.chunk.css.map": "/react-tabs-intro/static/css/main.8784100a.chunk.css.map",
+    "static/css/main.96dfebe8.chunk.css.map": "/react-tabs-intro/static/css/main.96dfebe8.chunk.css.map",
     "static/media/semantic.min.css": "/react-tabs-intro/static/media/outline-icons.ef60a4f6.woff"
   }
 }
