@@ -89,7 +89,7 @@ button {
   user-select: none;
   border: 0;
   border-radius: 2px;
-  background: rgba(103, 58, 183, 1);
+  background: rgb(204, 39, 39);
   color: #fff;
   outline: 0;
 }

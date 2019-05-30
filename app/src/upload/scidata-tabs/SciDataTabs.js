@@ -75,7 +75,7 @@ class SciDataTabs extends Component {
     renderJsonForm(dataset) {
         return <div>
             <JsonForms schema={dataset.schema} uischema={dataset.uischema} path={dataset.path}/>
-            <Button content='Submit' color='violet' onClick={() => this.removeTab(dataset.name)}/>
+            <Button content='Submit' color='red' onClick={() => this.removeTab(dataset.name)}/>
         </div>
     }
 
@@ -120,7 +120,11 @@ class SciDataTabs extends Component {
         //const myArray = this.createTabs();
         return (
             <div>
-                <Button content='Submit All Datasets' color='violet' onClick={() => this.removeAllTabs()}/>
+                <Button
+                    content='Submit All Datasets'
+                    color='blue'
+                    onClick={() => this.removeAllTabs()}
+                />
                 <Grid>
                     <Grid.Column width={4}>
                         <Menu fluid vertical tabular>

@@ -22,7 +22,7 @@ class App extends React.Component {
     renderDropDown = (title, dropdown) => {
         return <Form>
             <Form.Field>
-                    <Label color='violet'>{title}: </Label> {dropdown}
+                    <Label color='red'>{title}: </Label> {dropdown}
                 </Form.Field>
             </Form>
     }
