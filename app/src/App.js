@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Label, Container } from "semantic-ui-react";
+import { Form, Label, Container, Header } from "semantic-ui-react";
 import { MethodDropdown } from './selection/method';
 import { ExperimentalTechniqueDropdown } from './selection/experimental/technique';
 import { CalculationTechniqueDropdown } from './selection/calculation/technique';
@@ -90,10 +90,16 @@ class App extends React.Component {
     render() {
         const display = this.state.display;
         return (
-            
-            <Container style={{ margin: 20 }}>
-                {display}
-            </Container>
+            <div>
+                <Header as='h2' icon textAlign='center'>
+                    <img src='logo.6023b87e.png' alt=""/>
+                        Data Ingestion
+                    <Header.Subheader>Upload files from multi-method data sources</Header.Subheader>
+                </Header>
+                <Container style={{ margin: 20 }}>
+                    {display}
+                </Container>
+            </div>
         )
     }
 };
