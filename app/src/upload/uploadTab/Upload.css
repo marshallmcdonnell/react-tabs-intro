@@ -37,7 +37,7 @@
   color: #555;
 }
 
-.Filename {  
+.Filename {
   display: flex;
   flex-direction: row;
   flex: 1;

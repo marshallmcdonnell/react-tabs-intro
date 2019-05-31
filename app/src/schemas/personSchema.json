@@ -1,18 +1,15 @@
 {
-    "title": "Person",
-    "type": "object",
-    "properties": {
-      "firstName": { "type": "string" },
-      "lastName": { "type": "string" },
-      "age": {
-        "description": "Age in years",
-        "type": "integer",
-        "minimum": 0
-      },
-      "shippingAddress": { "type": "string" }
+  "title": "Person",
+  "type": "object",
+  "properties": {
+    "firstName": { "type": "string" },
+    "lastName": { "type": "string" },
+    "age": {
+      "description": "Age in years",
+      "type": "integer",
+      "minimum": 0
     },
-    "required": [
-      "firstName",
-      "lastName"
-    ]
+    "shippingAddress": { "type": "string" }
+  },
+  "required": ["firstName", "lastName"]
 }

@@ -55,7 +55,7 @@ class Dropzone extends Component {
       array.push({
         fileObj: list.item(i),
         title: list.item(i).name,
-        fileType: 'XY file'
+        fileType: "XY file"
       });
     }
     return array;
