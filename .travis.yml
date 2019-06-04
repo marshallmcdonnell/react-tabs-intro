@@ -8,5 +8,6 @@ cache:
   - packages/react-scripts/node_modules
 script:
   - cd app
-  - npm run build
-  - npm test
+  - yarn install
+  - yarn run build
+  - yarn test
