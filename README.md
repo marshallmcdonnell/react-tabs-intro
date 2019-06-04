@@ -1,6 +1,7 @@
 |  Dev                                                                                                                                                    |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [![Build Status](https://travis-ci.org/marshallmcdonnell/react-tabs-intro.svg?branch=master)](https://travis-ci.org/marshallmcdonnell/react-tabs-intro) |
+| [![codecov](https://codecov.io/gh/marshallmcdonnell/react-tabs-intro/branch/master/graph/badge.svg)](https://codecov.io/gh/marshallmcdonnell/react-tabs-intro) |
 
 React Multiple Tabs via Semantic-UI + JSONForms
 ==================================================
