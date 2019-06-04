@@ -2,16 +2,13 @@
   "name": "react-tabs-intro",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://marshallmcdonnell.github.io/react-tabs-intro",
+  "homepage": "http://rse-dev1.ornl.gov:8080/datastreams/data-ingestion-ui",
   "dependencies": {
     "@jsonforms/core": "^2.2.3",
     "@jsonforms/examples": "^2.2.3",
     "@jsonforms/material-renderers": "^2.2.3",
     "@jsonforms/react": "^2.2.3",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
     "gh-pages": "^2.0.1",
-    "prettier": "1.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
@@ -45,5 +42,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0"
   }
 }
