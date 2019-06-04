@@ -3,10 +3,10 @@ node_js:
   - 8
 cache:
   directories:
-  - app/node_modules
-  - app/packages/create-react-app/node_modules
-  - app/packages/react-scripts/node_modules
+  - node_modules
+  - packages/create-react-app/node_modules
+  - packages/react-scripts/node_modules
 script:
   - cd app
-  - yarn run build
-  - yarn test
+  - npm run build
+  - npm test
